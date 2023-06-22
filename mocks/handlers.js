@@ -1,7 +1,7 @@
 import { rest } from 'msw'
 
 export const handlers = [
-  rest.get('http://localhost:3001/api/docs_list', (req, res, ctx) => {
+  rest.get('https://api.dictionaryapi.dev/api/v2/entries/en/hello', (req, res, ctx) => {
     const data = [
       { name: 'MSW', url: 'https://mswjs.io/' },
       { name: 'Tailwind CSS', url: 'https://tailwindcss.com/' },

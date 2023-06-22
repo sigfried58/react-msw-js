@@ -1,77 +1,40 @@
-// import fetch from 'cross-fetch'
-import { useEffect, useState } from 'react'
+import {useEffect, useState} from 'react';
+import fetch from 'cross-fetch';
+import UserForm from './UserForm';
+import UserList from './UserList';
 
-import './index.css'
-import logo from './assets/react.svg'
-
-import './App.css'
-
-const App = () => {
-  const [count, setCount] = useState(0)
-  const [docsList, setDocsList] = useState([])
+function App() {
+  const [users, setUsers] = useState([]);
+  const [data, setData] = useState();
 
   useEffect(() => {
-    fetch('http://localhost:3001/api/docs_list')
-      .then((res) => res.json())
-      .then((data) => {
-        setDocsList(data)
-      })
-  }, [])
+    getApiData();
+  }, []);
+
+  // Function to collect data
+  const getApiData = async () => {
+    const response = await fetch(
+      'https://api.dictionaryapi.dev/api/v2/entries/en/hello',
+    )
+      .then(response => response.json())
+      .catch(error => setData(error));
+
+    // update the state
+    setData(response);
+  };
+
+  const onUserAdd = user => {
+    setUsers([...users, user]);
+  };
 
   return (
-    <main className="App">
-      <img src={logo} className="App-logo" alt="logo" />
-      <p>test</p>
-      <p>
-        <button
-          type="button"
-          className="h-26 my-4 w-52 rounded border border-solid border-white px-4 py-3"
-          onClick={() => setCount(count + 1)}
-        >
-          count is: {count}
-        </button>
-      </p>
-      <p>
-        Edit <code>App.tsx</code> and save to test HMR updates.
-      </p>
-      <p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-        {' | '}
-        <a
-          className="App-link"
-          href="https://vitejs.dev/guide/features.html"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Vite Docs
-        </a>
-        {docsList.length > 0
-          ? docsList.map((v, i) => {
-              return (
-                <span key={i}>
-                  {' | '}
-                  <a
-                    className="App-link"
-                    href={v.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    {v.name}
-                  </a>
-                </span>
-              )
-            })
-          : false}
-      </p>
-    </main>
-  )
+    <div>
+      <UserForm onUserAdd={onUserAdd} />
+      <div>{data ? data[0].name : ''}</div>
+      <hr />
+      <UserList users={users} />
+    </div>
+  );
 }
 
-export default App
+export default App;

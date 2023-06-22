@@ -12,6 +12,14 @@ dist
 dist-ssr
 *.local
 
+# testing
+/coverage
+/cypress/videos
+/cypress/screenshots
+
+# production
+/build
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
@@ -22,3 +30,8 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Allow people to make ignored files anywhere
+*.ignored.*
+ignored/
+.eslintcache

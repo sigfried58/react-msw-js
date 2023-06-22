@@ -1,5 +1,4 @@
 import {useEffect, useState} from 'react';
-import fetch from 'cross-fetch';
 import UserForm from './UserForm';
 import UserList from './UserList';
 

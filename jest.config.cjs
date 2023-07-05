@@ -1,8 +1,8 @@
 module.exports = {
   testEnvironment: 'jest-environment-jsdom',
-  setupFilesAfterEnv: ['<rootDir>/src/setupTests.js'],
+  setupFilesAfterEnv: ['<rootDir>/src/setupTests.ts'],
   moduleNameMapper: {
-    '\\.(gif|ttf|eot|svg|png)$': '<rootDir>/mocks/fileMock.js',
+    '\\.(gif|ttf|eot|svg|png)$': '<rootDir>/mocks/fileMock.ts',
     '\\.(css|less|sass|scss)$': 'identity-obj-proxy',
   },
   collectCoverageFrom: [
